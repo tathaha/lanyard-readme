@@ -19,8 +19,15 @@ jobs:
             - name: Install deps
               run: yarn install
               
-            - run: npx browserslist@latest --update-db
-
+            - name: Update with npx
+              run: npx browserslist@latest --update-db
+              
+            - name: clean cache
+              run: yarn cache clean && rm -rf node_modules && yarn install
+              
+            - name: test build
+              run: yarn run build 
+           
             - name: Run ESLint
               run: yarn lint
               env:
